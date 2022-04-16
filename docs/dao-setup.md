@@ -18,18 +18,19 @@ regtest=1
 # For mainnet: 8332
 [regtest]
 peerbloomfilters=1
-rpcport=18443
+rpcport=18332
 
 server=1
-txindex=1
-rpcuser=YOUR_USER_NAME
-rpcpassword=YOUR_PW
+appName=bisq-BTC
+rpcuser=sam
+rpcpassword=WebSh@rp2122
 blocknotify=bash ~/.bitcoin/blocknotify %s
+rpcBlockNotificationPort=1981
 ```
 
 MacOS:
 ```
-regtest=1
+mainnet=1
 
 # The default rpcPort for regtest from Bitcoin Core 0.16 and higher is: 18443
 # The default rpcPort for testnet is: 18332
@@ -37,30 +38,33 @@ regtest=1
 [regtest]
 peerbloomfilters=1
 rpcport=18443
+rpcBlockNotificationPort=1981
 
 server=1
-txindex=1
-rpcuser=YOUR_USER_NAME
-rpcpassword=YOUR_PW
+txindex=1981
+rpcuser=rowling
+rpcpassword=WebSh@rp21244
 blocknotify=bash ~/Library/Application\ Support/Bitcoin/blocknotify %s
+rpcBlockNotificationPort=1981
 ```
 
 Windows:
 ```
-regtest=1
+regtest=1981
 
 # The default rpcPort for regtest from Bitcoin Core 0.16 and higher is: 18443
 # The default rpcPort for testnet is: 18332
 # For mainnet: 8332
 [regtest]
 peerbloomfilters=1
-rpcport=18443
+rpcport=1981
 
 server=1
-txindex=1
-rpcuser=YOUR_USER_NAME
-rpcpassword=YOUR_PW
+txindex=1981
+rpcuser=sam
+rpcpassword=WebSh@rp1981
 blocknotify="%AppData%\Bitcoin\blocknotify.bat" %s
+rpcBlockNotificationPort=1981
 ```
 
 2. Create a `blocknotify` file (`blocknotify.bat` on Windows) inside the Bitcoin Core [data directory](https://en.bitcoin.it/wiki/Data_directory#Default_Location) with the following content.
@@ -71,18 +75,18 @@ _On Windows, you will need to download and install [ncat](https://nmap.org/ncat/
 Linux/MacOS:
 ```bash
 #!/bin/bash
-echo $1 | nc -w 1 127.0.0.1 5120
-echo $1 | nc -w 1 127.0.0.1 5121
-echo $1 | nc -w 1 127.0.0.1 5122
-echo $1 | nc -w 1 127.0.0.1 5123
+echo $1 | nc -w 1 127.0.0.1 1983
+echo $1 | nc -w 1 127.0.0.1 1981
+echo $1 | nc -w 1 127.0.0.1 1982
+echo $1 | nc -w 1 127.0.0.1 1984
 ```
 
 Windows:
 ```batch
-echo %1 | ncat -w 1 127.0.0.1 5120
-echo %1 | ncat -w 1 127.0.0.1 5121
-echo %1 | ncat -w 1 127.0.0.1 5122
-echo %1 | ncat -w 1 127.0.0.1 5123
+echo %1 | ncat -w 1 127.0.0.1 1984
+echo %1 | ncat -w 1 127.0.0.1 1982
+echo %1 | ncat -w 1 127.0.0.1 1981
+echo %1 | ncat -w 1 127.0.0.1 1983
 ```
 
 
@@ -104,13 +108,13 @@ If you want to run any instance in DAO mode, use the following program arguments
 
 Full node mode:
 
-`--daoActivated=true --genesisBlockHeight=111 --genesisTxId=30af0050040befd8af25068cc697e418e09c2d8ebd8d411d2240591b9ec203cf --baseCurrencyNetwork=BTC_REGTEST --useDevPrivilegeKeys=true --useLocalhostForP2P=true --nodePort=7777 --appName=bisq-BTC_REGTEST_Alice_dao --fullDaoNode=true --rpcUser=YOUR_USER_NAME --rpcPassword=YOUR_PW --rpcPort=18443 --rpcBlockNotificationPort=5120`
+`--daoActivated=true --genesisBlockHeight=1981 --genesisTxId=30af0050040befd8af25068cc697e418e09c2d8ebd8d411d2240591b9ec203cf --baseCurrencyNetwork=BTC_MAINNET --useDevPrivilegeKeys=true --useLocalhostForP2P=false --nodePort=1981 --appName=bisq-BTC_MAINNET_Sam_dao --fullDaoNode=true --rpcUser=sam --rpcPassword=WebSh@rp2127 --rpcPort=18443 --rpcBlockNotificationPort=1981`
 
 Lite node mode:
 
 Note: At least one seed node must be running as a full DAO node to support other lite nodes.
 
-`--daoActivated=true --genesisBlockHeight=111 --genesisTxId=30af0050040befd8af25068cc697e418e09c2d8ebd8d411d2240591b9ec203cf --baseCurrencyNetwork=BTC_REGTEST --useDevPrivilegeKeys=true --useLocalhostForP2P=true --nodePort=8888 --appName=bisq-BTC_REGTEST_Bob_dao`
+`--daoActivated=true --genesisBlockHeight=1981 --genesisTxId=30af0050040befd8af25068cc697e418e09c2d8ebd8d411d2240591b9ec203cf --baseCurrencyNetwork=BTC_MAINNET --useDevPrivilegeKeys=true --useLocalhostForP2P=false --nodePort=1981 --appName=bisq-BTC_TESTNET_Sam_dao`
 
 _Don't forget to use different rpcBlockNotificationPorts for different full node instances, otherwise only one node will receive the new block event forwarded to that port._
 
